@@ -1,0 +1,26 @@
+#: import UserItem  components.UserItem
+
+<UserItem>:
+    RelativeLayout:
+        canvas.before:
+            Color:
+                rgba: 121 / 255, 183 / 255, 255 / 255, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        BoxLayout:
+            size_hint: 1, 0.6
+            pos_hint: {"y": 0.25}
+            orientation: "vertical"
+            Label:
+                text: root.master_user.name
+                font_size: 50
+            Label:
+                text: root.master_user.type
+                font_size: 30
+            Label:
+                text: root.master_user.department
+                font_size: 30
+            Label:
+                text: root.master_user.id
+                font_size: 30

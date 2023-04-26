@@ -1,0 +1,11 @@
+#: import UserItems  components.UserItems
+#: include  components/managerscreen/managerpanel/useritems/useritem/useritem.kv
+#: include  components/managerscreen/managerpanel/useritems/useritemfrozenable/useritemfrozenable.kv
+
+<UserItems>:
+    canvas.before:
+        Color:
+            rgba: 0.6, 0.6, 0.6, 0.1
+        Rectangle:
+            pos: self.pos
+            size: self.size

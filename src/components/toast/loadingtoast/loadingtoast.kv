@@ -1,0 +1,19 @@
+#: import LoadingToast  components.LoadingToast
+#: import LOaginImage  components.LoadingImage
+
+<LoadingImage>:
+    canvas.before:
+        PushMatrix
+        Rotate:
+            angle: self.angle
+            axis: (0, 0, 1)
+            origin: self.center
+    canvas.after:
+        PopMatrix
+    source: "resource/graphics/loading.png"
+
+<LoadingToast>:
+    auto_dismiss: False
+    LoadingImage
+    Label:
+        text: root.msg

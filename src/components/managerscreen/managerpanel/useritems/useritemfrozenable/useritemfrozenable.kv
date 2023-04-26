@@ -1,0 +1,15 @@
+#: import UserItemFrozenable  components.UserItemFrozenable
+#: import FrozenButton  components.FrozenButton
+
+<FrozenButton>:
+    plain_color: 1, 1, 1, 1
+    press_color: 0.5, 0.5, 0.5, 0.5
+
+<UserItemFrozenable>:
+    FrozenButton:
+        size_hint: 1 / 3, 0.15
+        pos_hint: {"x": 1 / 3, "y": 0.05}
+        text: "冻结" if root.master_user.state == 'plain' else "解冻" if root.master_user.state == 'frozen' else ""
+        color: "red" if root.master_user.state == 'plain' else "green" if root.master_user.state == 'frozen' else "black"
+        background_color: "white"
+        on_release: (root.frozen_user(), print(root.master_user.name))

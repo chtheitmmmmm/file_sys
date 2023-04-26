@@ -1,0 +1,16 @@
+#: import FileViewPage  components.FileViewPage
+#: import FileViewPageLayout  components.FileViewPageLayout
+#: import FileViewButton  components.FileViewButton
+#: include  components/basepanel/fileinfo/fileinfopages/filesviewpage/fileviewpage/fileviewback/fileviewback.kv
+#: include  components/superbutton/superbutton.kv
+
+<FileViewPage>:
+    name: "view"
+
+<FileViewPageLayout>:
+    orientation: "vertical"
+
+<FileViewButton>:
+    font_size: 40
+    size_hint: 220 / (1300 / 3), 1 / 3
+    pos_hint: { "x": ((1300 / 3) - 220) / (1300 / 3) / 2, "y": 1 / 3 }

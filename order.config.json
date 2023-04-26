@@ -1,0 +1,36 @@
+{
+    "name": "文件系统",
+    "code": "A06154",
+    "techTags": [
+        "kivy",
+        "pillow"
+    ],
+    "flow": {
+        "begin": "2022-12-31 19:37:58",
+        "due": "2022-12-31 19:37:58",
+        "actual": [
+            "2022-12-31 19:46:00"
+        ]
+    },
+    "make": {
+        "includes": [
+            "src",
+            "depen.bat",
+            "!./**/__pycache__",
+            "README.md"
+        ],
+        "archiveType": "zip",
+        "delivery": "file_system.zip"
+    },
+    "wealth": {
+        "total": 850,
+        "payTimes": [
+            {
+                "time": "2022-12-31 19:38:56",
+                "money": 850
+            }
+        ]
+    },
+    "version": "2.0.3",
+    "comment": ""
+}

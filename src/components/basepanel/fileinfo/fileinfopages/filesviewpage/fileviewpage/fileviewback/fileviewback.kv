@@ -1,0 +1,29 @@
+#: import FileViewBack  components.FileViewBack
+#: import FileViewPrintButton  components.FileViewBackButton
+#: import FileViewBackButton  components.FileViewPrintButton
+#: include  components/basepanel/fileinfo/fileinfopages/filesviewpage/fileviewpage/fileviewback/fileview/fileview.kv
+#: include  components/basepanel/fileinfo/fileinfopages/filesviewpage/fileviewpage/fileviewback/printsetting/printsetting.kv
+
+<FileViewBackButton>:
+    text: "<<"
+    color: "black"
+    font_size: 60
+    size_hint: 0.1, 0.1
+    pos_hint: { "x": 0.01, "y": 0.88 }
+
+<FileViewPrintButton>:
+    text: "打印输出"
+    font_size: 35
+    color: "white"
+    plain_color: 29 / 255, 134 / 255, 241 / 255, 1
+    press_color: 0 / 255, 85 / 255, 171 / 255, 1
+
+<FileViewBack>:
+    FileViewBackButton:
+        index: 0
+        on_release: root.dispatch("on_back")
+    FileViewPrintButton:
+        index: 1
+        size_hint: 180 / 1300, 70 / (1200 - 180)
+        pos_hint: {"x": 1100 / 1300, "top": (1200 - 180 - 35) / (1200 - 180)}
+        on_release: root.dispatch("on_print")

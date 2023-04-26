@@ -1,0 +1,28 @@
+#: import MyFileItemsPage  components.MyFileItemsPage
+#: import MyFileItemsPageLayout  components.MyFileItemsPageLayout
+#: import MyFileItemsPageLayoutUploadButton  components.MyFileItemsPageLayoutUploadButton
+#: include  components/basepanel/fileinfo/mine/myfilesviewpage/myfileitemspage/myfileitems/myfileitems.kv
+
+<MyFileItemsPageLayoutUploadButton>
+
+
+<MyFileItemsPage>:
+    MyFileItemsPageLayout
+
+<MyFileItemsPageLayout>:
+    orientation: "vertical"
+    MyFileItems:
+        size_hint_y: (1200 - 180 - 120) / (1200 - 180)
+    MyFileItemsPageLayoutUploadButton:
+        canvas.before:
+            Color:
+                rgba: 116 / 255, 233 / 255, 130 / 255, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        background_color: "#74e982"
+        size_hint_y: 120 / (1300 - 180)
+        font_size: 60
+        disabled: root.STATE != "plain"
+        text: "上传中" if root.STATE == "uploading" else "上传"
+        on_release: root.dispatch("on_upload")

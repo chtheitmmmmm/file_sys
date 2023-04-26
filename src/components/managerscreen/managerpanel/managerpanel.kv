@@ -1,0 +1,24 @@
+#: import ManagerPanel  components.ManagerPanel
+#: import ManagerPanelHeaders  components.ManagerPanelHeaders
+#: import ManagerPanelHeader  components.ManagerPanelHeader
+#: import ManagerPanelView  components.ManagerPanelView
+#: include  components/managerscreen/managerpanel/useritems/useritems.kv
+#: include  components/basepanel/basepanel.kv
+
+<ManagerPanelHeader>
+
+<ManagerPanelView>
+
+<ManagerPanel>:
+    ManagerPanelHeaders
+    ManagerPanelView
+
+<ManagerPanelHeaders>:
+    ManagerPanelHeader:
+        text: "用户"
+        pos_hint: { "top": (1300 - 120 * 2) / 1300, "left": 0 }
+        size_hint_y: 120 / 1300
+        UserItems
+
+<ManagerPanelView>
+

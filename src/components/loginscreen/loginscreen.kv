@@ -1,0 +1,488 @@
+#：kivy "2.1"
+#: set fn "resource/fonts/pingfang.ttf"
+#: import LoginMsgContent  components.LoginMsgContent
+#: import ConnectionMsgContent  components.ConnectionMsgContent
+#: import RgtMsgContent  components.RgtMsgContent
+#: import APICallMsgContent  components.APICallMsgContent
+
+# 登入页面
+<LoginScreen>:
+    id: loginscreen
+    department: department
+    user_type: user_type
+    canvas.before:
+        Color:
+            rgba: 217 / 255, 225 / 255, 0 / 255, 0.9
+        Rectangle:
+            pos: 0, 0
+            size: self.size
+    RelativeLayout:
+        TabbedPanel:
+            tab_pos: 'top_mid'
+            size_hint: 0.6, 0.8
+            pos_hint: { "x": 0.2, "y": 0.1 }
+            do_default_tab: False
+            # 登入表单
+            TabbedPanelItem:
+                background_color: 1, 1, 0, 1
+                text: "登录"
+                font_name: fn
+                RelativeLayout:
+                    canvas:
+                        Color:
+                            rgba: 60 / 255, 60 / 255, 60 / 255, 0.8
+                        Rectangle:
+                            pos: 0, 0
+                            size: self.size
+                    RelativeLayout:
+                        size_hint: 0.9, 0.6
+                        pos_hint: { "x": 0.05, "y": 0.3 }
+                        # 身份证号
+                        RelativeLayout:
+                            pos_hint: { "x": 0, "y": 0.35 }
+                            size_hint: 1, 0.3
+                            RelativeLayout:
+                                size_hint: 1, 0.5
+                                pos_hint: { "x": 0, "y": 0.25 }
+                                Label:
+                                    canvas.before:
+                                        Color:
+                                            rgba: 1, 1, 1, 1
+                                        Rectangle:
+                                            pos: 0, 0
+                                            size: self.size
+                                    size_hint: 0.5, 1
+                                    font_name: fn
+                                    text: "身份证号"
+                                    color: 0, 0, 0, 1
+                                TextInput:
+                                    text: root.login_inputs['id']
+                                    on_text: root.login_inputs['id'] = self.text
+                                    pos_hint: {"x": 0.5, "y": 0}
+                                    size_hint: 0.5, 1
+                                    font_name: fn
+                                    multiline: False
+                        # 密码
+                        RelativeLayout:
+                            pos_hint: { "x": 0, "y": 0.15 }
+                            size_hint: 1, 0.3
+                            RelativeLayout:
+                                size_hint: 1, 0.5
+                                pos_hint: {"x": 0, "y": 0.25 }
+                                Label:
+                                    size_hint: 0.5, 1
+                                    font_name: fn
+                                    text: "密码"
+                                    color: "black"
+                                    canvas.before:
+                                        Color:
+                                            rgba: 1, 1, 1, 1
+                                        Rectangle:
+                                            pos: 0, 0
+                                            size: self.size
+                                TextInput:
+                                    password: True
+                                    multiline: False
+                                    pos_hint: { "x": 0.5, "y": 0 }
+                                    size_hint: 0.5, 1
+                                    font_name: fn
+                                    text: root.login_inputs['password']
+                                    on_text: root.login_inputs['password'] = self.text
+                    Button:
+                        size_hint: 0.5, 0.1
+                        pos_hint: { "x": 0.25, "y": 0.1}
+                        text: "Logining..." if root.STATE == "Logining" else "Login"
+                        background_color: "#8888ff"
+                        on_release: root.switch_state('Logining')
+                        disabled: root.STATE != root.Plain
+            # 注册表单
+            TabbedPanelItem:
+                background_color: 1, 0, 0, 1
+                text: "注册"
+                font_name: fn
+                RelativeLayout:
+                    canvas:
+                        Color:
+                            rgba: 60 / 255, 60 / 255, 60 / 255, 0.8
+                        Rectangle:
+                            pos: 0, 0
+                            size: self.size
+                    RelativeLayout:
+                        size_hint: 0.9, 1
+                        pos_hint: { "x": 0.05, "y": 0.2 }
+                        # 身份证号
+                        RelativeLayout:
+                            pos_hint: { "x": 0, "y": 0.6 }
+                            size_hint: 1, 0.18
+                            RelativeLayout:
+                                size_hint: 1, 0.5
+                                pos_hint: { "x": 0, "y": 0.25 }
+                                Label:
+                                    canvas.before:
+                                        Color:
+                                            rgba: 1, 1, 1, 1
+                                        Rectangle:
+                                            pos: 0, 0
+                                            size: self.size
+                                    size_hint: 0.5, 1
+                                    font_name: fn
+                                    text: "身份证号"
+                                    color: 0, 0, 0, 1
+                                TextInput:
+                                    pos_hint: { "x": 0.5, "y": 0 }
+                                    size_hint: 0.5, 1
+                                    font_name: fn
+                                    multiline: False
+                                    text: root.register_inputs['id']
+                                    on_text: root.register_inputs['id'] = self.text
+                        # 姓名
+                        RelativeLayout:
+                            pos_hint: { "x": 0, "y": 0.48 }
+                            size_hint: 1, 0.18
+                            RelativeLayout:
+                                size_hint: 1, 0.5
+                                pos_hint: { "x": 0, "y": 0.25 }
+                                Label:
+                                    canvas.before:
+                                        Color:
+                                            rgba: 1, 1, 1, 1
+                                        Rectangle:
+                                            pos: 0, 0
+                                            size: self.size
+                                    size_hint: 0.5, 1
+                                    font_name: fn
+                                    text: "姓名"
+                                    color: 0, 0, 0, 1
+                                TextInput:
+                                    pos_hint: { "x": 0.5, "y": 0 }
+                                    size_hint: 0.5, 1
+                                    font_name: fn
+                                    multiline: False
+                                    text: root.register_inputs['name']
+                                    on_text: root.register_inputs['name'] = self.text
+                        # 单位
+                        RelativeLayout:
+                            pos_hint: { "x": 0, "y": 0.36 }
+                            size_hint: 1, 0.18
+                            RelativeLayout:
+                                size_hint: 1, 0.5
+                                pos_hint: { "x": 0, "y": 0.25 }
+                                Label:
+                                    canvas.before:
+                                        Color:
+                                            rgba: 1, 1, 1, 1
+                                        Rectangle:
+                                            pos: 0, 0
+                                            size: self.size
+                                    size_hint: 0.5, 1
+                                    font_name: fn
+                                    text: "单位"
+                                    color: 0, 0, 0, 1
+                                Button:
+                                    id: selected_depart
+                                    text: root.register_inputs['department']
+                                    on_text: root.register_inputs['department'] = self.text
+                                    font_name: fn
+                                    background_color: "#33e4ff"
+                                    pos_hint: { "x": 0.5, "y": 0 }
+                                    size_hint: 0.5, 1
+                                    on_release: department.open(self)
+                                DropDown:
+                                    id: department
+                                    font_name: fn
+                                    size_hint_x: 0.5
+                                    on_select: selected_depart.text = args[1]
+                                    Button:
+                                        font_name: fn
+                                        text: "研发部"
+                                        size_hint: 1, None
+                                        on_release: department.select(self.text)
+                                        background_color: "blue"
+                                    Button:
+                                        font_name: fn
+                                        text: "推广部"
+                                        pos_hint_y: None
+                                        size_hint: 1, None
+                                        on_release: department.select(self.text)
+                                        background_color: "yellow"
+                                    Button:
+                                        font_name: fn
+                                        text: "工程部"
+                                        size_hint: 1, None
+                                        on_release: department.select(self.text)
+                                        background_color: "black"
+                                    Button:
+                                        font_name: fn
+                                        text: "管理部"
+                                        size_hint: 1, None
+                                        on_release: department.select(self.text)
+                                        background_color: "red"
+                        # 用户类型
+                        RelativeLayout:
+                            pos_hint: { "x": 0, "y": 0.24 }
+                            size_hint: 1, 0.18
+                            RelativeLayout:
+                                size_hint: 1, 0.5
+                                pos_hint: { "x": 0, "y": 0.25 }
+                                Label:
+                                    canvas.before:
+                                        Color:
+                                            rgba: 1, 1, 1, 1
+                                        Rectangle:
+                                            pos: 0, 0
+                                            size: self.size
+                                    size_hint: 0.5, 1
+                                    font_name: fn
+                                    text: "用户类型"
+                                    color: 0, 0, 0, 1
+                                Button:
+                                    id: selected_user_type
+                                    text: root.register_inputs['user_type']
+                                    on_text: root.register_inputs['user_type'] = self.text
+                                    font_name: fn
+                                    background_color: "#33e4ff"
+                                    pos_hint: { "x": 0.5, "y": 0 }
+                                    size_hint: 0.5, 1
+                                    on_release: user_type.open(self)
+                                DropDown:
+                                    id: user_type
+                                    font_name: fn
+                                    size_hint_x: 0.5
+                                    on_select: selected_user_type.text = args[1]
+                                    Button:
+                                        font_name: fn
+                                        text: "超级管理员"
+                                        size_hint: 1, None
+                                        on_release: user_type.select(self.text)
+                                        background_color: "yellow"
+                                    Button:
+                                        font_name: fn
+                                        text: "管理员"
+                                        pos_hint_y: None
+                                        size_hint: 1, None
+                                        on_release: user_type.select(self.text)
+                                        background_color: "blue"
+                                    Button:
+                                        font_name: fn
+                                        text: "用户"
+                                        size_hint: 1, None
+                                        on_release: user_type.select(self.text)
+                                        background_color: "white"
+                        # 密码
+                        RelativeLayout:
+                            pos_hint: { "x": 0, "y": 0.12 }
+                            size_hint: 1, 0.18
+                            RelativeLayout:
+                                size_hint: 1, 0.5
+                                pos_hint: { "x": 0, "y": 0.25 }
+                                Label:
+                                    size_hint: 0.5, 1
+                                    font_name: fn
+                                    text: "密码"
+                                    color: "black"
+                                    canvas.before:
+                                        Color:
+                                            rgba: 1, 1, 1, 1
+                                        Rectangle:
+                                            pos: 0, 0
+                                            size: self.size
+                                TextInput:
+                                    password: True
+                                    multiline: False
+                                    pos_hint: { "x": 0.5, "y": 0 }
+                                    size_hint: 0.5, 1
+                                    font_name: fn
+                                    text: root.register_inputs['password']
+                                    on_text: root.register_inputs['password'] = self.text
+                        # 确认密码
+                        RelativeLayout:
+                            pos_hint: { "x": 0, "y": 0 }
+                            size_hint: 1, 0.18
+                            RelativeLayout:
+                                size_hint: 1, 0.5
+                                pos_hint: { "x": 0, "y": 0.25 }
+                                Label:
+                                    size_hint: 0.5, 1
+                                    font_name: fn
+                                    text: "确认密码"
+                                    color: "black"
+                                    canvas.before:
+                                        Color:
+                                            rgba: 1, 1, 1, 1
+                                        Rectangle:
+                                            pos: 0, 0
+                                            size: self.size
+                                TextInput:
+                                    password: True
+                                    multiline: False
+                                    pos_hint: { "x": 0.5, "y": 0 }
+                                    size_hint: 0.5, 1
+                                    font_name: fn
+                                    text: root.register_inputs['confirm_password']
+                                    on_text: root.register_inputs['confirm_password'] = self.text
+                    Button:
+                        size_hint: 0.5, 0.1
+                        pos_hint: { "x": 0.25, "y": 0.1 }
+                        text: "Registering..." if root.STATE == "Registering" else "Register"
+                        background_color: "#8888ff"
+                        disabled: root.STATE != root.Plain
+                        on_press: root.switch_state('Registering')
+
+<LoginMsgContent>:
+    Label:
+        text: "抱歉"
+        size_hint: (1, 0.1)
+        pos_hint: {"x": 0, "y": 0.8}
+        font_size: 50
+        font_name: fn
+    Label:
+        text: "未能登录成功, 可能的原因为"
+        size_hint: (1, 0.1)
+        pos_hint: {"x": 0, "y": 0.65}
+        font_size: 25
+        font_name: fn
+    Label:
+        text: "1.用户未注册"
+        size_hint: (0.4, 0.1)
+        pos_hint: {"x": 0.3, "y": 0.55}
+        font_size: 30
+        font_name: fn
+        text_size: self.size
+        halign: "left"
+    Label:
+        text: "2.密码错误"
+        size_hint: (0.4, 0.1)
+        pos_hint: {"x": 0.3, "y": 0.4}
+        font_size: 30
+        font_name: fn
+        text_size: self.size
+        halign: "left"
+    Label:
+        text: "3.用户被冻结"
+        size_hint: (0.4, 0.1)
+        pos_hint: {"x":0.3, "y": 0.25}
+        font_size: 30
+        font_name: fn
+        text_size: self.size
+        halign: "left"
+    Label:
+        text: "4.数据库错误"
+        size_hint: (0.4, 0.1)
+        pos_hint: { "x": 0.3, "y": 0.1 }
+        font_size: 30
+        font_name: fn
+        text_size: self.size
+        halign: "left"
+
+<LoginMsg>:
+    size_hint: None, None
+    size: app.window.width / 2, app.window.height / 2
+    center: app.window.center
+    title: "FAIL"
+    title_align: 'center'
+    content: LoginMsgContent()
+
+<ConnectionMsgContent>:
+    Label:
+        text: "抱歉"
+        size_hint: (1, 0.1)
+        pos_hint: { "x": 0, "y": 0.7 }
+        font_size: 50
+        font_name: fn
+    Label:
+        text: "网络异常或服务器出错"
+        size_hint: (1, 0.1)
+        pos_hint: { "x": 0, "y": 0.55 }
+        font_size: 25
+        font_name: fn
+
+# 连接出错
+<ConnectionMsg>:
+    size_hint: None, None
+    size: app.window.width / 2, app.window.height / 2
+    center: app.window.center
+    title: "FAIL"
+    title_align: 'center'
+    content: ConnectionMsgContent()
+
+<APICallMsgContent>:
+    Label:
+        text: "认证失败"
+        size_hint: (1, 0.1)
+        pos_hint: { "x": 0, "y": 0.7 }
+        font_size: 50
+        font_name: fn
+    Label:
+        text: "错误信息"
+        size_hint: (1, 0.1)
+        pos_hint: { "x": 0, "y": 0.55 }
+        font_size: 25
+        font_name: fn
+    Label:
+        size_hint: (0.8, 0.1)
+        pos_hint: { "x": 0.1, "y": 0.4 }
+        font_size: 30
+        font_name: fn
+# API调用出错
+<APICallMsg>:
+    size_hint: None, None
+    size: app.window.width / 2, app.window.height / 2
+    center: app.window.center
+    title: "FAIL"
+    title_align: 'center'
+    content: APICallMsgContent()
+
+<RgtMsgContent>:
+    Label:
+        text: "抱歉"
+        size_hint: (1, 0.1)
+        pos_hint: { "x": 0, "y": 0.8 }
+        font_size: 50
+        font_name: fn
+        shorten: True
+    Label:
+        text: "注册失败，可能原因"
+        size_hint: (1, 0.1)
+        pos_hint: { "x": 0, "y": 0.65 }
+        font_size: 25
+        font_name: fn
+    Label:
+        text: "1.身份证号或姓名不合法"
+        size_hint: (0.8, 0.1)
+        pos_hint: { "x": 0.1, "y": 0.5 }
+        font_size: 30
+        font_name: fn
+        text_size: self.size
+        halign: "left"
+    Label:
+        text: "2.密码不合法，5~32位数字或/与字母"
+        size_hint: (0.8, 0.1)
+        pos_hint: { "x": 0.1, "y": 0.35 }
+        font_size: 30
+        font_name: fn
+        text_size: self.size
+        halign: "left"
+    Label:
+        text: "3.密码前后不一致"
+        size_hint: (0.8, 0.1)
+        pos_hint: { "x": 0.1, "y": 0.2 }
+        font_size: 30
+        font_name: fn
+        text_size: self.size
+        halign: "left"
+    Label:
+        text: "4.用户已注册或数据库读取错误"
+        size_hint: (0.8, 0.1)
+        pos_hint: { "x": 0.1, "y": 0.05 }
+        font_size: 30
+        font_name: fn
+        text_size: self.size
+        halign: "left"
+# 注册信息填写错误
+<RgtMsg>:
+    size_hint: None, None
+    size: app.window.width / 2, app.window.height / 2
+    center: app.window.center
+    title: "FAIL"
+    title_align: 'center'
+    content: RgtMsgContent()

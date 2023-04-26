@@ -1,0 +1,13 @@
+#: import SendFileView  components.SendFileView
+#: import SendFileViewLayout  components.SendFileViewLayout
+
+<SendFileView>:
+    SendFileViewLayout:
+        size_hint_y: (50 * (len(self.content.split('\n')) + 1) + 120) / root.size[1] if root.file else 1
+        file: root.file
+
+<SendFileViewLayout>:
+    Label:
+        text: f"To {root.file.master.name if root.file else '未知作者'}"
+        font_size: 50
+        size_y: 100

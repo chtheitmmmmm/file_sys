@@ -1,0 +1,26 @@
+#: import FileItem  components.FileItem
+<FileItem>:
+    Label:
+        canvas.before:
+            Color:
+                rgba: 179 / 255, 179 / 255, 179 / 255, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        text_size: self.size
+        halign: "left"
+        valign: "center"
+        font_size: 60
+        text: root.file.name
+        padding_x: 40
+        size_hint: 1, 1
+    Label:
+        text_size: self.size
+        halign: "right"
+        valign: "center"
+        font_size: 30
+        text: root.file.create_time
+        padding_x: 30
+        size_hint: 1, 1
+
+

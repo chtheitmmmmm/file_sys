@@ -1,0 +1,54 @@
+#: import MyFileViewPage  components.MyFileViewPage
+#: import AskRecieverIdModal  components.AskRecieverIdModal
+#: import MyFileViewPageLayout  components.MyFileViewPageLayout
+#: include  components/basepanel/fileinfo/mine/myfilesviewpage/myfileviewpage/mybuttons/mybuttons.kv
+#: include  components/basepanel/fileinfo/mine/myfilesviewpage/myfileviewpage/myfileviewback/myfileviewback.kv
+#: include  components/basepanel/fileinfo/mine/myfilesviewpage/myfileviewpage/encryptsetting/encryptsetting.kv
+
+<AskRecieverIdModal>:
+    size_hint: 0.5, 0.5
+    RelativeLayout:
+        RelativeLayout:
+            canvas:
+                Color:
+                    rgba: 124 / 255, 189 / 255, 255 / 255, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            BoxLayout:
+                size_hint: 0.5, 0.4
+                pos_hint: { "x": 0.25, "y": 0.45 }
+                orientation: "vertical"
+                Label:
+                    size_hint_y: 0.8
+                    font_size: 40
+                    color: "black"
+                    text: "请输入文件接收者的身份证号"
+                TextInput:
+                    id: input
+                    size_hint_y: 0.2
+                    multiline: False
+            BoxLayout:
+                size_hint: 0.6, 0.1
+                pos_hint: {"x": 0.2, "y": 0.2}
+                Button:
+                    text: "确认"
+                    background_color: "green"
+                    on_release: root.dispatch("on_confirm", input.text)
+                Button:
+                    text: "取消"
+                    background_color: "white"
+                    on_release: root.dispatch("on_cancel")
+
+<MyFileViewPage>:
+    MyFileViewPageLayout:
+        file: root.file
+
+<MyFileViewPageLayout>:
+    MyFileViewBack:
+        file: root.file
+        size_hint_y: (1200 - 180 - 225) / (1200 - 180)
+
+    MyButtons:
+        size_hint_y: 225 / (1200 - 180)
+        file: root.file

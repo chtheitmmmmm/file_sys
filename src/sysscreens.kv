@@ -1,0 +1,20 @@
+#: kivy 2.1
+
+#: import SysScreens sysscreens.SysScreens
+#: include  components/loginscreen/loginscreen.kv
+#: include  components/userscreen/userscreen.kv
+#: include  components/managerscreen/managerscreen.kv
+#: include  components/toast/errtoast/errtoast.kv
+#: include  components/toast/loadingtoast/loadingtoast.kv
+#: include  components/toast/successtoast/successtoast.kv
+#: include  components/basepanel/basepanel.kv
+
+<SysScreens>:
+    transition: kivy.uix.screenmanager.NoTransition()
+    LoginScreen:
+        name: "login"
+#    UserScreen:
+#        name: "user"
+#    ManagerScreen:
+#        name: "manager"
+

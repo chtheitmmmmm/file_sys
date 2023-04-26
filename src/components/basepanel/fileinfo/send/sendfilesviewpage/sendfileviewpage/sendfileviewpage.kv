@@ -1,0 +1,17 @@
+#: import SendFileViewPage  components.SendFileViewPage
+#: import SendFileViewPageLayout  components.SendFileViewPageLayout
+#: include  components/basepanel/fileinfo/send/sendfilesviewpage/sendfileviewpage/sendfileviewback/sendfileviewback.kv
+
+<SendFileViewPage>:
+    SendFileViewPageLayout:
+        file: root.file
+
+<SendFileViewPageLayout>:
+    SendFileViewBack:
+        file: root.file
+    RelativeLayout:
+        size_hint: 1, 1 / 3
+        Label:
+            color: "black"
+            font_size: 40
+            text: f"To {root.file.sender.name if root.file else '未知接收者'}"

@@ -1,0 +1,17 @@
+#: import PlazaFileViewPage  components.PlazaFileViewPage
+#: import PlazaFileViewPageLayout  components.PlazaFileViewPageLayout
+#: include  components/basepanel/fileinfo/plaza/plazafilesviewpage/plazafileviewpage/plazafileviewback/plazafileviewback.kv
+
+<PlazaFileViewPage>:
+    PlazaFileViewPageLayout:
+        file: root.file
+
+<PlazaFileViewPageLayout>:
+    PlazaFileViewBack:
+        file: root.file
+    RelativeLayout:
+        size_hint: 1, 1 / 3
+        Label:
+            color: "black"
+            font_size: 40
+            text: f"by {root.file.master.name if root.file else '未知作者'}"

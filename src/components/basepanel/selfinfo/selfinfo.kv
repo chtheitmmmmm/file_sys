@@ -1,0 +1,70 @@
+#: import SelfInfo  components.SelfInfo
+<SelfInfo>:
+    # 容器
+    RelativeLayout:
+        id: ctn
+        canvas.before:
+            Color:
+                rgba: 229 / 255, 241 / 255, 255 / 255, 1
+            Rectangle:
+                pos: 0, 0
+                size: ctn.size
+        size_hint: 1000 / 1300, 800 / 1200
+        pos_hint: {"x": (1300 - 1000) / 2 / 1300, "y": (1200 - 800) / 2 / 1200}
+        # 所有文字信息容器
+        RelativeLayout:
+            size_hint: 0.8, 0.4
+            pos_hint: {"x": 0.1, "y": 0.3}
+            BoxLayout:
+                orientation: "vertical"
+                # 姓名
+                BoxLayout:
+                    Label:
+                        size_hint_x: 0.4
+                        text: "姓名"
+                        font_size: 50
+                        color: "black"
+                    Label:
+                        size_hint_x: 0.6
+                        text: app.user.name if app.user else ""
+                        font_size: 50
+                        color: "black"
+                # 身份证号
+                BoxLayout:
+                    Label:
+                        size_hint_x: 0.4
+                        text: "身份证号"
+                        font_size: 50
+                        color: "black"
+                    Label:
+                        size_hint_x: 0.6
+                        text: app.user.id if app.user else ""
+                        font_size: 50
+                        color: "black"
+
+                # 密码
+                BoxLayout:
+                    Label:
+                        size_hint_x: 0.4
+                        text: "密码"
+                        font_size: 50
+                        color: "black"
+                    Label:
+                        size_hint_x: 0.6
+                        text: app.user.password if app.user else ""
+                        font_size: 50
+                        color: "black"
+
+                # 用户类型
+                BoxLayout:
+                    Label:
+                        size_hint_x: 0.4
+                        text: "用户类型"
+                        font_size: 50
+                        color: "black"
+
+                    Label:
+                        size_hint_x: 0.6
+                        text: app.user.type if app.user else ""
+                        font_size: 50
+                        color: "black"

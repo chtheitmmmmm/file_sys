@@ -1,0 +1,25 @@
+#: import MyButtons  components.MyButtons
+#: include  components/basepanel/fileinfo/fileinfopages/filesviewpage/fileviewpage/fileviewpage.kv
+
+<MyButtons>:
+    RelativeLayout:
+        FileViewButton:
+            text: "发送"
+            plain_color: 21 / 255, 225 / 255, 0 / 255, 1
+            press_color: 13 / 255, 126 / 255, 0 / 255, 1
+            background_color: "#15e100"
+            on_release: root.dispatch("on_send", root.file)
+    RelativeLayout:
+        FileViewButton:
+            text: '' if not root.file else "取消加密" if root.file.is_encrypted else "加密"
+            plain_color: 255 / 255, 77 / 255, 77 / 255, 1
+            press_color: 181 / 255, 65 / 255, 65 / 255, 1
+            background_color: "#ff4d4d"
+            on_release: root.dispatch("on_encrypt", root.file)
+    RelativeLayout:
+        FileViewButton:
+            text: "删除"
+            plain_color: 0.5, 0.5, 0.5, 1
+            press_color: 0, 0, 0, 1
+            on_release: root.dispatch("on_delete", root.file)
+

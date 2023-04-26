@@ -1,0 +1,21 @@
+#: import SuccessToast  components.SuccessToast
+#: include  components/toast/toast.kv
+
+<SuccessToast>:
+    canvas:
+        Color:
+            rgba: 230 / 255, 230 / 255, 230 / 255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        size_hint: 0.6, 0.6
+        pos_hint: {"center": root.center}
+        orientation: "vertical"
+        Image:
+            source: "resource/graphics/success.png"
+            size_hint_y: 0.8
+        Label:
+            text: root.msg
+            color: "black"
+            size_hint_y: 0.2

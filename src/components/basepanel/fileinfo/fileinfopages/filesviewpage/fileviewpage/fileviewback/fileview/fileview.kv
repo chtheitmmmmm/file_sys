@@ -1,0 +1,36 @@
+#: import FileView  components.FileView
+#: import FileViewLayout  components.FileViewLayout
+
+<FileViewLayout>:
+
+    # The title
+    Label:
+        id: title
+        text: root.name
+        font_size: 60
+        size_hint_y: 200 / root.size[1]
+        color: "black"
+        pos_hint: {"top": 1}
+    # content container
+    TextInput:
+        id: content
+        file: root.file
+        size_hint: 0.8, 1
+        pos_hint: { "top": 1 - title.size_hint_y, "x": 0.1 }
+        input_filter: lambda *args:False
+        color: "black"
+        background_normal: "resource/graphics/docbg.png"
+        background_active: "resource/graphics/docbg.png"
+        text_size: 0.8 * self.size[0], 0.9 * self.size[1]
+        text: root.content
+        font_size: 30
+        top: 120
+
+
+
+
+
+<FileView>:
+    index: 2
+    scroll_type: ['bars', 'content']
+

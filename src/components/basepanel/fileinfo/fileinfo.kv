@@ -1,0 +1,42 @@
+#: import FileInfo  components.FileInfo
+#: import FileInfoHeaders  components.FileInfoHeaders
+#: import FileInfoHeader  components.FileInfoHeader
+#: import FileInfoView  components.FileInfoView
+#: include  components/basepanel/fileinfo/fileinfopages/fileinfopages.kv
+#: include  components/basepanel/fileinfo/mine/mine.kv
+#: include  components/basepanel/fileinfo/plaza/plaza.kv
+#: include  components/basepanel/fileinfo/recieve/recieve.kv
+#: include  components/basepanel/fileinfo/send/send.kv
+
+<FileInfoHeader>:
+    canvas.before:
+        Color:
+            rgba: (255 / 255, 124 / 255, 124 / 255, 1) if not self.default else (254 / 255, 18 / 255, 18 / 255, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    font_size: 60
+
+<FileInfoView>:
+    size_hint_y: (1300 - 180) / 1300
+
+<FileInfoHeaders>:
+    size_hint_y: 180 / 1300
+    FileInfoHeader:
+        text: "我的"
+        default: True
+        Mine
+    FileInfoHeader:
+        text: "接收"
+        Recieve
+    FileInfoHeader:
+        text: "发送"
+        Send
+    FileInfoHeader:
+        text: "广场"
+        Plaza
+
+<FileInfo>:
+    orientation: "vertical"
+    FileInfoHeaders
+    FileInfoView

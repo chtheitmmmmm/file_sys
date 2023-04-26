@@ -1,0 +1,190 @@
+#: import PrintSetting  components.PrintSetting
+#: import SuperButton  components.SuperButton
+#: import PrvImage  components.PrvImage
+
+<PrintSetting>:
+    auto_dismiss: False
+    size_hint: 820 / 1600, 1100 / 1200
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: 60 / 255, 60 / 255, 60 / 255, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        orientation: "vertical"
+        Label:
+            size_hint_y: 200 / 1100
+            text: "打印设置"
+            font_size: 50
+            color: "white"
+        RelativeLayout:
+            size_hint_y: 900 / 1100
+            BoxLayout:
+                orientation: "vertical"
+                size_hint_x: 520 / 820
+                pos_hint: { "x": 150 / 820 }
+                # 路径选择
+                RelativeLayout:
+                    size_hint_y: 65 / 900
+                    BoxLayout:
+                        size_hint_y: 60 / 65
+                        pos_hint: {"y": 2.5 / 65}
+                        Label:
+                            text: "路径"
+                            font_size: 35
+                            color: "white"
+                            size_hint_x: 0.2
+                        SuperButton:
+                            press_color: 0.7, 0.7, 0.7, 1
+                            plain_color: 1, 1, 1, 1
+                            size_hint_x: 0.8
+                            text: root.output_path if root.output_path else '选择路径'
+                            color: "black"
+                            on_release: root.dispatch("on_select_path")
+                # 水印设置
+                RelativeLayout:
+                    size_hint_y: 65 * 3 / 900
+                    BoxLayout:
+                        BoxLayout:
+                            orientation: "vertical"
+                            size_hint_x: 0.2
+                            Label:
+                                text: "水印"
+                                color: "white"
+                                font_size: 35
+                            RelativeLayout
+                            RelativeLayout
+                        GridLayout:
+                            id: wctn
+                            cols: 2
+                            size_hint_x: 0.8
+                            Switch:
+                                active: root.water
+                                on_active: setattr(root, 'water', self.active)
+                            # 字体大小
+                            RelativeLayout:
+                                BoxLayout:
+                                    size_hint_y: 45 / 65
+                                    pos_hint: {"y": 10 / 65}
+                                    TextInput:
+                                        text: root.fsize
+                                        multiline: False
+                                        background_normal: "resource/graphics/docbg.png"
+                                        background_active: "resource/graphics/docbg.png"
+                                        on_text: setattr(root, 'fsize', self.text), root.dispatch("on_refresh_prv")
+                                    Image:
+                                        source: "resource/graphics/wtm/fsize.png"
+                            # 倾斜角度
+                            RelativeLayout:
+                                BoxLayout:
+                                    size_hint_y: 45 / 65
+                                    pos_hint: { "y": 10 / 65 }
+                                    TextInput:
+                                        text: root.ang
+                                        multiline: False
+                                        background_normal: "resource/graphics/docbg.png"
+                                        background_active: "resource/graphics/docbg.png"
+                                        on_text: setattr(root, 'ang', self.text), root.dispatch("on_refresh_prv")
+                                    Image:
+                                        source: "resource/graphics/wtm/ang.png"
+                            # 行距
+                            RelativeLayout:
+                                BoxLayout:
+                                    size_hint_y: 45 / 65
+                                    pos_hint: { "y": 10 / 65 }
+                                    TextInput:
+                                        text: root.lgap
+                                        multiline: False
+                                        background_normal: "resource/graphics/docbg.png"
+                                        background_active: "resource/graphics/docbg.png"
+                                        on_text: setattr(root, 'lgap', self.text), root.dispatch("on_refresh_prv")
+                                    Image:
+                                        source: "resource/graphics/wtm/lgap.png"
+                            # 列距
+                            RelativeLayout:
+                                BoxLayout:
+                                    size_hint_y: 45 / 65
+                                    pos_hint: { "y": 10 / 65 }
+                                    TextInput:
+                                        text: root.cgap
+                                        multiline: False
+                                        background_normal: "resource/graphics/docbg.png"
+                                        background_active: "resource/graphics/docbg.png"
+                                        on_text: setattr(root, 'cgap', self.text), root.dispatch("on_refresh_prv")
+                                    Image:
+                                        source: "resource/graphics/wtm/cgap.png"
+                            # 不透明度
+                            RelativeLayout:
+                                BoxLayout:
+                                    size_hint_y: 45 / 65
+                                    pos_hint: { "y": 10 / 65 }
+                                    TextInput:
+                                        text: root.opc
+                                        multiline: False
+
+                                        background_normal: "resource/graphics/docbg.png"
+                                        background_active: "resource/graphics/docbg.png"
+                                        on_text: setattr(root, 'opc', self.text), root.dispatch("on_refresh_prv")
+                                    Image:
+                                        source: "resource/graphics/wtm/opc.png"
+                # 预览
+                BoxLayout:
+                    orientation: "vertical"
+                    size_hint_y: 460 / 900
+                    RelativeLayout:
+                        size_hint_y: 65 * 2 / 460
+                        BoxLayout:
+                            size_hint_y: 90 / 130
+                            pos_hint: {"y": 20 / 130}
+                            BoxLayout:
+                                orientation: "vertical"
+                                size_hint_x: 0.2
+                                Label:
+                                    text: "预览"
+                                    font_size: 35
+                                    color: "white"
+                                Switch:
+                                    active: root.prv
+                                    on_active: setattr(root, 'prv', self.active)
+                            RelativeLayout:
+                                size_hint_x: 0.8
+                                SuperButton:
+                                    size_hint: 0.8, 1
+                                    pos_hint: {"x": 0.1, "y": 0}
+                                    plain_color: 1, 1, 1, 1
+                                    press_color: 0.7, 0.7, 0.7, 1
+                                    text: "原图预览"
+                                    color: "black"
+                                    on_release: root.dispatch("on_prv_show")
+                    RelativeLayout:
+                        id: pctn
+                        size_hint_y: (460 - 65 * 2) / 460
+                        ScrollView:
+                            size_hint_x: 275 / 520
+                            on_width: setattr(root, 'disp_width', self.width)
+                            pos_hint: { "x": (520 - 275) / 2 / 520 }
+                            RelativeLayout:
+                                id: prv_ctn
+                # 确定取消按钮
+                RelativeLayout:
+                    size_hint_y: 180 / 960
+                    BoxLayout:
+                        size_hint_y: 60 / 180
+                        size_hint_x: 480 / 820
+                        pos_hint: {'x': 170 / 820, 'y': 60 / 180}
+                        SuperButton:
+                            text: "确定"
+                            color: "white"
+                            press_color: 0 / 255, 80 / 255, 200 / 255, 1
+                            plain_color: 0 / 255, 111 / 255, 225 / 255, 1
+                            on_release: root.dispatch("on_confirm")
+                        SuperButton:
+                            text: "取消"
+                            color: "white"
+                            plain_color: 0.7, 0.7, 0.7, 1
+                            press_color: 0.9, 0.9, 0.9, 1
+                            on_release: root.dispatch("on_cancel")
+
+<PrvImage>:
+    size_hint: 1, 1

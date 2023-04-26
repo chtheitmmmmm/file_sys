@@ -1,0 +1,51 @@
+#: import BasePanel  components.BasePanel
+#: import BasePanelHeaders  components.BasePanelHeaders
+#: import BasePanelHeader  components.BasePanelHeader
+#: import BasePanelContent  components.BasePanelContent
+#: import BasePanelView  components.BasePanelView
+#: include  components/basepanel/selfinfo/selfinfo.kv
+#: include  components/basepanel/fileinfo/fileinfo.kv
+
+<BasePanel>:
+    canvas.before:
+        Color:
+            rgba: 251 / 255, 251 / 255, 251 / 255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<BasePanelHeaders>:
+    orientation: "vertical"
+    size_hint_x: 300 / 1500
+    canvas:
+        Color:
+            rgba: 124 / 255, 189 / 255, 255 / 255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BasePanelHeader:
+        text: "个人信息"
+        pos_hint: {"top": 1, "left": 0}
+        size_hint_y: 120 / 1300
+        default: True
+        SelfInfo
+    BasePanelHeader:
+        text: "文件"
+        pos_hint: {"top": (1300 - 120) / 1300, "left": 0}
+        size_hint_y: 120 / 1300
+        FileInfo
+
+
+<BasePanelHeader>:
+    canvas.before:
+        Color:
+            rgba: (68 / 255, 86 / 255, 255 / 255, 1) if not self.default else (18 / 255, 46 / 255, 254 / 255, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    font_size: 50
+
+<BasePanelView>:
+    size_hint_x: 1200 / 1500
+
+<BasePanelContent>
